@@ -1,0 +1,6 @@
+#!/bin/sh
+# just a simple script to easily get output from Glyphs.app
+
+defaults read com.GeorgSeifert.Glyphs2 >> ~/Desktop/glyphs.app-defaults-output.txt
+
+/Applications/Glyphs.app/Contents/MacOS/Glyphs 2>&1  | tee >> ~/Desktop/glyphs.app-log-output.txt
