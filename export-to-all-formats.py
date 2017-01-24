@@ -13,6 +13,10 @@ import os
 projectpath = Glyphs.font.filepath
 print "Path of current source file: " + projectpath
 
+print "Copyright: " + Glyphs.font.copyright
+print "Designer URL: " + Glyphs.font.designerURL
+print "Manufacturer URL: "  + Glyphs.font.manufacturerURL
+
 # Set build parameters
 OTF_AutoHint = True
 TTF_AutoHint = True
@@ -21,18 +25,14 @@ UseSubroutines = True
 UseProductionNames = True
 
 # standard folders
-buildFolder = os.path.join(os.path.dirname(projectpath), 'build')
-sourceFolder = os.path.join(os.path.dirname(projectpath), 'source')
-webFolder = os.path.join(os.path.dirname(projectpath), 'web')
+buildFolder = os.path.join(os.path.dirname(projectpath), '../build')
+webFolder = os.path.join(os.path.dirname(projectpath), '../web')
+sourceFolder = os.path.join(os.path.dirname(projectpath), '.')
 
-# test standard subfolders are present, if not create them
+
+# test if standard subfolders are present, if not create them
 try:
     os.makedirs(buildFolder),
-except OSError:
-    pass # already exists
-
-try:
-    os.makedirs(sourceFolder),
 except OSError:
     pass # already exists
 
@@ -46,7 +46,7 @@ for f in Glyphs.fonts:
     for instance in f.instances:
         if instance.active:
             result = instance.generate(FontPath=buildFolder)
-            print  "\n", "Exporting all formats for", Glyphs.font.familyName, instance.weight, " - version",Glyphs.font.versionMajor,".",Glyphs.font.versionMinor
+            print  "\n", "Exporting all formats (OTF TTF UFO WOFF) for", Glyphs.font.familyName, instance.weight, " - version",Glyphs.font.versionMajor,".",Glyphs.font.versionMinor
 
 for instance in f.instances:
 	instance.generate(Format = "OTF", FontPath = os.path.expanduser(buildFolder), AutoHint = OTF_AutoHint, RemoveOverlap = RemoveOverlap, UseSubroutines = UseSubroutines, UseProductionNames = UseProductionNames)
@@ -58,7 +58,7 @@ for instance in f.instances:
 	ufoExporter = Glyphs.objectWithClassName_("GlyphsFileFormatUFO")
 	ufoExporter.setConvertNames_(True)
 	ufoExporter.setFontMaster_(font.masters[0])
-	url = NSURL.fileURLWithPath_(sourceFolder + "/" + font.familyName + ".ufo")
+	url = NSURL.fileURLWithPath_(sourceFolder + "/" + font.familyName + "-" + instance.weight + ".ufo")
 	ufoExporter.writeUfo_toURL_error_(font, url, None)
 
 for instance in f.instances:
