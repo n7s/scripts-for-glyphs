@@ -4,6 +4,15 @@ __doc__="""
 Export all formats (.otf . ttf. .ufo .woff) to standard local folders
 """
 
+
+"""
+todo:
+export to separately named UFO file to get the clean .fea
+compare / review
+throw away
+merge back
+"""
+
 __copyright__ = 'Copyright (c) 2017, SIL International  (http://www.sil.org)'
 __license__ = 'Released under the MIT License (http://opensource.org/licenses/MIT)'
 __author__ = 'Nicolas Spalinger.'
@@ -22,7 +31,7 @@ OTF_AutoHint = True
 TTF_AutoHint = True
 RemoveOverlap = True
 UseSubroutines = True
-UseProductionNames = True
+UseProductionNames = True # True means Production names (uniXXX)
 
 # standard folders
 buildFolder = os.path.join(os.path.dirname(projectpath), '../build')
@@ -42,27 +51,26 @@ except OSError:
     pass # already exists
 
 # Export for all instances
-for f in Glyphs.fonts:
-    for instance in f.instances:
+for font in Glyphs.fonts:
+    for instance in font.instances:
         if instance.active:
             result = instance.generate(FontPath=buildFolder)
             print  "\n", "Exporting all formats (OTF TTF UFO WOFF) for", Glyphs.font.familyName, instance.weight, " - version",Glyphs.font.versionMajor,".",Glyphs.font.versionMinor
 
-for instance in f.instances:
+for instance in font.instances:
 	instance.generate(Format = "OTF", FontPath = os.path.expanduser(buildFolder), AutoHint = OTF_AutoHint, RemoveOverlap = RemoveOverlap, UseSubroutines = UseSubroutines, UseProductionNames = UseProductionNames)
 
-for instance in f.instances:
+for instance in font.instances:
 	instance.generate(Format = "TTF", FontPath = os.path.expanduser(buildFolder), AutoHint = TTF_AutoHint, RemoveOverlap = RemoveOverlap, UseProductionNames = UseProductionNames)
 
-for instance in f.instances:
+for instance in font.instances:
 	ufoExporter = Glyphs.objectWithClassName_("GlyphsFileFormatUFO")
-	ufoExporter.setConvertNames_(True)
+	ufoExporter.setConvertNames_(True)  # True means uniXXX notation (ProductionNames)
 	ufoExporter.setFontMaster_(font.masters[0])
 	url = NSURL.fileURLWithPath_(sourceFolder + "/" + font.familyName + "-" + instance.weight + ".ufo")
 	ufoExporter.writeUfo_toURL_error_(font, url, None)
 
-for instance in f.instances:
-	instance.generate(Format = "WOFF", FontPath = os.path.expanduser(webFolder), AutoHint = TTF_AutoHint, RemoveOverlap = RemoveOverlap, UseSubroutines = UseSubroutines, UseProductionNames = UseProductionNames)  #  WOFF export not ready yet (build 965)
-
+for instance in font.instances:
+	instance.generate(Format = "WOFF", FontPath = os.path.expanduser(webFolder), AutoHint = TTF_AutoHint, RemoveOverlap = RemoveOverlap, UseSubroutines = UseSubroutines, UseProductionNames = UseProductionNames)  #  WOFF export is not ready yet (build 971) but promised.
 
 Glyphs.showNotification('Exported formats to standard folders', '%s %s.%s\n%s' % (Glyphs.font.familyName, Glyphs.font.versionMajor, Glyphs.font.versionMinor, projectpath))
