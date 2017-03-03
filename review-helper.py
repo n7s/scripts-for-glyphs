@@ -19,14 +19,13 @@ for font in Glyphs.fonts:
 			if instance.active:
 				layer = Glyphs.font.selectedLayers[0] # current layer
 
-print "\nNotes in", font.familyName, "font project: \n\n", font.note
+print "\nNotes in font project", font.familyName, font.filepath, "version", Glyphs.font.versionMajor, ".", Glyphs.font.versionMinor, ":", "\n", font.note
 
-print  "\nGlyphs annotations to review in selected layer :"
+print  "\nOn-canvas glyphs annotations to review in selected layer :"
 for annotation in layer.annotations:
 	print layer, ":",  annotation.text
 
-print  "\nGlyphs annotations to review across the whole font project :"
+print  "\nNotes per glyphs to review across the whole font project :"
 for glyph in font.glyphs:
-			reviewable = glyph.name, ":", glyph.note
-			print reviewable
-			# still need to filter out the empty slots showing as None
+	if not glyph.note == glyph.name:
+		print glyph.name, ":", glyph.note
