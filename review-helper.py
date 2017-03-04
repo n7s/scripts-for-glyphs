@@ -1,4 +1,4 @@
-#MenuTitle: Review helper: reveall all notes and annotations
+#MenuTitle: Review helper: reveal all notes and annotations
 # -*- coding: utf-8 -*-
 __doc__="""
 Review helper, see all annotations/notes in current font project, including selected ones
