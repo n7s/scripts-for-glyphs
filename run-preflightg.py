@@ -1,7 +1,7 @@
-#MenuTitle: Run preflight
+#MenuTitle: Run preflightg - G for Glyphs -
 # -*- coding: utf-8 -*-
 __doc__="""
-Runs the preflight shell script from your chosen project folder
+Runs the preflightg - G for Glyphs - shell script from your chosen project folder
 """
 
 __copyright__ = 'Copyright (c) 2018, SIL International  (http://www.sil.org)'
@@ -36,7 +36,7 @@ tell application "Finder"
 
 		tell window 1
 
-			do script "cd " & projectRoot & "; ./preflight"
+			do script "cd " & projectRoot & "; ./preflightg"
 
 		end tell
 
@@ -44,10 +44,9 @@ tell application "Finder"
 
 end tell
 
-end tell
 
 tell application "Finder"
-	display notification "Running preflight on your project, watch for errors in the output, when done you can close the window" with title "Preflight" sound name "default"
+	display notification "Running preflight on your project, watch for errors in the output, when done you can close the window" with title "Preflightg" sound name "default"
 end tell
 
 
