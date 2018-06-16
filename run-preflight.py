@@ -44,7 +44,6 @@ tell application "Finder"
 
 end tell
 
-end tell
 
 tell application "Finder"
 	display notification "Running preflight on your project, watch for errors in the output, when done you can close the window" with title "Preflight" sound name "default"
