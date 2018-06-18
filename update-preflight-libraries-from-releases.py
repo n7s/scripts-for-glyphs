@@ -40,7 +40,7 @@ tell application "Finder"
 end tell
 
 tell application "Finder"
-	display notification "Updating your preflight dependencies, please enter your user password" with title "Preflight dependencies update" sound name "default"
+	display notification "Updating your preflight dependencies, please enter your user password. The version numbers of the libraries will be indicated in the output. Watch for errors in the output, when done you can close the window" with title "Preflight dependencies update" sound name "default"
 end tell
 
 
