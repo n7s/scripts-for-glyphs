@@ -11,6 +11,7 @@ __author__ = 'Nicolas Spalinger'
 import GlyphsApp
 from subprocess import Popen, PIPE
 
+
 def runAppleScript(scpt, args=[]):
 	p = Popen(['osascript', '-'] + args, stdin=PIPE, stdout=PIPE, stderr=PIPE)
 	stdout, stderr = p.communicate(scpt)
@@ -20,7 +21,7 @@ def runAppleScript(scpt, args=[]):
 	return stdout
 
 
-runpreflight = """
+runpreflightg = """
 
 tell application "Finder"
 
@@ -46,11 +47,11 @@ end tell
 
 
 tell application "Finder"
-	display notification "Running preflight on your project, watch for errors in the output, when done you can close the window" with title "Preflightg" sound name "default"
+	display notification "Running preflightg on your project, watch for errors in the output, when done you can close the window" with title "Preflightg" sound name "default"
 end tell
 
 
 
 """
 
-save   = runAppleScript( runpreflight )
+save   = runAppleScript( runpreflightg )
