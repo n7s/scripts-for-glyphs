@@ -43,7 +43,7 @@ tell application "Finder"
 
 			delay 25
 
-			do script "cd " & sourcefolder & "; open *.glyphs"
+			do script "cd " & sourcefolder & "; open *.glyphs masters/*.glyphs"
 
 			tell window 1 to quit
 
