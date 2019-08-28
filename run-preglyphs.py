@@ -1,7 +1,7 @@
 #MenuTitle: Run preglyphs
 # -*- coding: utf-8 -*-
 __doc__="""
-Runs preglyphs from your chosen project folder then open the generated file
+Runs preglyphs from your chosen project folder then shows the generated file in the Finder
 """
 
 __copyright__ = 'Copyright (c) 2019, SIL International  (http://www.sil.org)'
@@ -41,11 +41,11 @@ tell application "Finder"
 
 			do script "cd " & projectRoot & "; ./preglyphs"
 
-			delay 25
+			delay 10
 
-			do script "cd " & sourcefolder & "; open *.glyphs masters/*.glyphs"
+			do script "cd " & sourcefolder & "; open -R *.glyphs" 
 
-			tell window 1 to quit
+			do script "cd " & sourcefolder & "; open -R masters/*.glyphs" 
 
 		end tell
 
